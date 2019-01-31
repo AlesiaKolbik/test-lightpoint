@@ -1,4 +1,4 @@
-import {ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT} from './actionTypes'
+import {ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT, FIND_PRODUCT, CLEAN_PRODUCT_FILTER} from './actionTypes'
 
 export function addProduct(shopId, obj) {
     return {
@@ -21,5 +21,18 @@ export function updateProduct(shopId, obj) {
         type: UPDATE_PRODUCT,
         shopId:shopId,
         payload: obj
+    }
+}
+
+export function findProduct(name) {
+    return {
+        type: FIND_PRODUCT,
+        payload: name
+    }
+}
+
+export function cleanProductFilter() {
+    return {
+        type: CLEAN_PRODUCT_FILTER
     }
 }

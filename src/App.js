@@ -15,7 +15,8 @@ import ProductsList from "./components/ProductsList";
 import {Home} from "./components/Home";
 
 
-let store = createStore(persistReducer);
+let store = createStore(persistReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 let persistor = persistStore(store);
 
 const history = createBrowserHistory();

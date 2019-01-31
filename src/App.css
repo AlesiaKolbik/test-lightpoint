@@ -13,6 +13,18 @@
 .drag {
     cursor: move;
 }
+.filter-block{
+    cursor: pointer;
+}
+.filter-item{
+    color:dodgerblue;
+    border-radius: 5px;
+    border: solid 1px dodgerblue;
+    padding: 5px 8px;
+}
+.cross{
+    color:dodgerblue;
+}
 
 @media screen and (min-width: 1024px) {
     .map {

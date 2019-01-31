@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
 import {shopReducer} from './shopReducer';
 import {productReducer} from './productReducer';
-import { persistReducer } from 'redux-persist';
+import {filterProduct} from './filterReducer';
+import {persistReducer} from 'redux-persist';
 import storageSession from "redux-persist/es/storage/session";
 
 
@@ -22,9 +23,11 @@ const productsPersistConfig = {
 };
 
 
+
 const rootReducer = combineReducers({
     shops: persistReducer(shopsPersistConfig, shopReducer),
-    products: persistReducer(productsPersistConfig, productReducer)
+    products: persistReducer(productsPersistConfig, productReducer),
+    filterProduct: filterProduct
 });
 
 export default persistReducer(rootPersistConfig, rootReducer)

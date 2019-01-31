@@ -5,13 +5,15 @@ import FormProduct from "./FormProduct";
 import {Link} from 'react-router-dom';
 import PropTypes from "prop-types";
 import {findShop as _findShop} from '../actions/shopServices';
-
+import {findProduct as _findProduct,
+    cleanProductFilter as _cleanProductFilter} from '../actions/productServices';
 
 class ProductsList extends Component {
     state = {
         shopId: null,
         form: false,
-        productToChange: null
+        productToChange: null,
+        searchProduct: ''
     };
 
     componentWillMount() {
@@ -31,12 +33,34 @@ class ProductsList extends Component {
         console.log(product);
         this.setState({form: true, productToChange: product})
     };
+    handleChange = (e) => {
+        this.setState({[e.target.id]: e.target.value});
+    };
+    handleFindProduct = () => {
+        this.props.findProduct(this.state.searchProduct.trim());
+    };
+    handleCleanFilter = () => {
+        this.props.cleanProductFilter();
+    };
 
     render() {
         const table =
             <div className="container">
                 <div className='col-12'>
                     <h2>Products</h2>
+                    <div className="input-group mb-3 col-6 float-right">
+                        <input type="text" className="form-control bg-light" id='searchProduct'
+                               value={this.state.searchProduct} onChange={this.handleChange}/>
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" type="submit"
+                                    onClick={this.handleFindProduct}>Search product
+                            </button>
+                        </div>
+                        {this.props.filterProduct && <div className='col-12 mt-2'>
+                            <div onClick={this.handleCleanFilter} className='filter-block'>
+                                <span className='filter-item'>{this.props.filterProduct}</span>
+                                <sup className='ml-1 cross'>&#128937;</sup></div></div>}
+                    </div>
                     <table className="table">
                         <thead>
                         <tr>
@@ -48,7 +72,9 @@ class ProductsList extends Component {
                         <tbody>
                         {
                             this.props.productsList[this.state.shopId] &&
-                            this.props.productsList[this.state.shopId].map((p, i) => {
+                            this.props.productsList[this.state.shopId].filter(p => {
+                                return p.name.includes(this.props.filterProduct)
+                            }).map((p, i) => {
                                 return <Product key={p.id} name={p.name} description={p.description} id={p.id}
                                                 number={i + 1}
                                                 editProduct={this.handleEditProduct}
@@ -83,10 +109,13 @@ class ProductsList extends Component {
 
 const mapStateToProps = state => ({
     productsList: state.products,
-    shop: state.shops.shopIsExists
+    shop: state.shops.shopIsExists,
+    filterProduct: state.filterProduct
 });
 const mapDispatchToProps = dispatch => ({
-    findShop: id => dispatch(_findShop(id))
+    findShop: id => dispatch(_findShop(id)),
+    findProduct: name => dispatch(_findProduct(name)),
+    cleanProductFilter: () => dispatch(_cleanProductFilter()),
 });
 
 ProductsList.propTypes = {
