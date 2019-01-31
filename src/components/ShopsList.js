@@ -32,15 +32,7 @@ class ShopsList extends Component {
     }
 
     render() {
-        const list = this.props.shopsList.map((s, i) => {
-            return <Shop key={s.id} name={s.name}
-                         address={s.address}
-                         mode={s.mode}
-                         id={s.id}
-                         number={s.number}
-                         editShop={this.handleEditShop}
-            />
-        });
+        const table = <Shop editShop={this.handleEditShop}/>;
         return (
             <div className="container">
                 <div className='row'>
@@ -50,20 +42,7 @@ class ShopsList extends Component {
                                   shopNumber={this.state.numberShops}/>
                         :
                         <div className='col-12'>
-                            <h2>Магазины</h2>
-                            <table className="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">№</th>
-                                    <th scope="col">Название</th>
-                                    <th scope="col">Адрес</th>
-                                    <th scope="col">Режим работы</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {list}
-                                </tbody>
-                            </table>
+                            {table}
                             <div className="w-100"></div>
                             <button type="button" className="btn btn-primary m-2"
                                     onClick={this.handleShowForm}>Добавить магазин

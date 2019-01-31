@@ -9,7 +9,8 @@ class FormShop extends Component {
         name: '',
         address: '',
         mode: '',
-        errors: {}
+        errors: {},
+        errorText:null
     };
 
     componentDidMount() {
@@ -45,68 +46,73 @@ class FormShop extends Component {
     };
     checkFormValid = () => {
         let errors = {};
+        let errorText = 'This field is required. The string must contain more than 2 characters.';
         if (!this.state.name || this.state.name.length < 2) {
-            errors.name = 'Поле необходимо заполнить. Строка должна содержать более 2 символов'
+            errors.name = '*';
         }
-        if (!this.state.address || this.state.address.length < 5) {
-            errors.address = 'Поле необходимо заполнить. Строка должна содержать более 5 символов';
+        if (!this.state.address || this.state.address.length < 2) {
+            errors.address = '*';
         }
-        if (!this.state.mode || this.state.mode.length < 5) {
-            errors.mode = 'Поле необходимо заполнить. Строка должна содержать более 5 символов'
+        if (!this.state.mode || this.state.mode.length < 2) {
+            errors.mode = '*';
         }
         if (Object.keys(errors).length !== 0) {
-            this.setState({errors: errors});
+            this.setState({errors: errors, errorText:errorText});
             return false;
         } else {
-            this.setState({errors: {}});
+            this.setState({errors: {}, errorText:null});
             return true;
         }
     };
     handleChange = (e) => {
         this.setState({[e.target.id]: e.target.value});
     };
-    handleCancel = (e) => {
+    handleCancel = () => {
         this.props.hideForm();
     };
 
     render() {
         return (
             <div className='col-6'>
-                <h3 className='mt-3 mb-3'>Создание магазина</h3>
+                <h3 className='mt-3 mb-3'>{this.props.shopToChange ? 'Edit shop' : 'Add shop'}</h3>
+                {this.state.errorText && <small className='text-danger'>{this.state.errorText}</small>}
                 <form>
                     <div className="form-group">
-                        <label htmlFor="name">Название</label>
-                        <input type="text" className="form-control"
+                        <label htmlFor="name">Title</label>
+                        <span className='text-danger'>{this.state.errors.name}</span>
+                        <input type="text"
+                               className={this.state.errors.name ? "form-control border-danger" : "form-control"}
                                id="name"
-                               placeholder="Введите название"
+                               placeholder="Name of shop"
                                onChange={this.handleChange}
                                value={this.state.name}/>
-                        <small className='text-danger'>{this.state.errors.name}</small>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="address">Адрес</label>
+                        <label htmlFor="address">Address</label>
+                        <span className='text-danger'>{this.state.errors.address}</span>
                         <input type="text"
-                               className="form-control"
+                               className={this.state.errors.address ?"form-control border-danger" : "form-control"}
                                id="address"
-                               placeholder="Введите адрес"
+                               placeholder="Address shop"
                                onChange={this.handleChange}
                                value={this.state.address}
                         />
-                        <small className='text-danger'>{this.state.errors.address}</small>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="mode">Режим работы</label>
+                        <label htmlFor="mode">Shop mode</label>
+                        <span className='text-danger'>{this.state.errors.mode}</span>
                         <input type="text"
-                               className="form-control"
+                               className={this.state.errors.mode ?"form-control border-danger" : "form-control"}
                                id="mode"
-                               placeholder="Введите режим работы магазина"
+                               placeholder="Shop mode"
                                onChange={this.handleChange}
                                value={this.state.mode}
                         />
-                        <small className='text-danger'>{this.state.errors.mode}</small>
                     </div>
-                    <button className="btn btn-primary btn-sm mr-2" onClick={this.handleSubmit}>Сохранить</button>
-                    <button className="btn btn-outline-primary btn-sm" onClick={this.handleCancel}>Отмена</button>
+                    <button className="btn btn-primary btn-sm mr-2" type="button"
+                            onClick={this.handleSubmit}>Save</button>
+                    <button className="btn btn-outline-primary btn-sm" type="button"
+                            onClick={this.handleCancel}>Cancel</button>
                 </form>
             </div>
         )
@@ -114,6 +120,7 @@ class FormShop extends Component {
 }
 
 const mapStateToProps = state => ({});
+
 const mapDispatchToProps = dispatch => ({
     addShop: obj => dispatch(updateList(obj)),
     updateShop: obj => dispatch(_updateShop(obj))

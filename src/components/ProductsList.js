@@ -28,6 +28,7 @@ class ProductsList extends Component {
         this.setState({form: false, productToChange: null});
     };
     handleEditProduct = (product) => {
+        console.log(product);
         this.setState({form: true, productToChange: product})
     };
 
@@ -40,8 +41,7 @@ class ProductsList extends Component {
                         <tr>
                             <th scope="col">№</th>
                             <th scope="col">Название</th>
-                            <th scope="col">Описание</th>
-                            <th scope="col"></th>
+                            <th scope="col" colSpan='2'>Описание</th>
                         </tr>
                         </thead>
                         <tbody>

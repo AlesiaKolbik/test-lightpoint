@@ -1,4 +1,4 @@
-import {FIND_SHOP, UPDATE_SHOP, UPDATE_SHOPS_LIST} from '../actions/actionTypes';
+import {ADD_SHOP, FIND_SHOP, UPDATE_SHOP, UPDATE_SHOPS_LIST} from '../actions/actionTypes';
 
 
 const initialState = {
@@ -13,11 +13,16 @@ export function shopReducer(state, action) {
         return initialState
     }
     switch (action.type) {
-        case UPDATE_SHOPS_LIST:
+        case ADD_SHOP:
             return {
                 ...state,
                 list: [...state.list,
                     action.payload]
+            };
+        case UPDATE_SHOPS_LIST:
+            return {
+                ...state,
+                list: action.payload
             };
         case UPDATE_SHOP:
             updateList = state.list.map(s => {

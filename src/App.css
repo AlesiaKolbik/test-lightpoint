@@ -1,19 +1,23 @@
 
-.card{
-  display: inline-block;
-  width: 14rem;
-  background: #f5f9f7;
-  margin: 5px;
+.card {
+    display: inline-block;
+    width: 14rem;
+    background: #f5f9f7;
+    margin: 5px;
 }
 
 #map {
-  height: 300px;
+    height: 300px;
 }
 
-@media screen and (min-width: 1024px){
-  .map {
-    height: 500px;
-  }
+.drag {
+    cursor: move;
+}
+
+@media screen and (min-width: 1024px) {
+    .map {
+        height: 500px;
+    }
 }
 
 
