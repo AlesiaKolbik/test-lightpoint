@@ -36,12 +36,13 @@ class ProductsList extends Component {
         const table =
             <div className="container">
                 <div className='col-12'>
+                    <h2>Products</h2>
                     <table className="table">
                         <thead>
                         <tr>
                             <th scope="col">№</th>
-                            <th scope="col">Название</th>
-                            <th scope="col" colSpan='2'>Описание</th>
+                            <th scope="col">Title</th>
+                            <th scope="col" colSpan='2'>Description</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -57,9 +58,9 @@ class ProductsList extends Component {
                         </tbody>
                     </table>
                     <button type="button" className="btn btn-primary m-2"
-                            onClick={this.handleShowForm}>Добавить товар
+                            onClick={this.handleShowForm}>Add product
                     </button>
-                    <Link to={`/shops`} className="btn btn-primary">Назад к списку магазинов</Link>
+                    <Link to={`/shops`} className="btn btn-primary">Back to stores</Link>
                 </div>
             </div>;
         const form = <FormProduct shopId={this.state.shopId}
@@ -68,9 +69,9 @@ class ProductsList extends Component {
         if (!this.props.shop) {
             return (
                 <div className='container text-center'>
-                    <h2 className='m-5'>Такого магазина не существует
+                    <h2 className='m-5'>The store does not exist
                     </h2>
-                    <Link to={`/shops`}>Назад к списку магазинов</Link>
+                    <Link to={`/shops`}>Back to stores</Link>
                 </div>
             )
         }

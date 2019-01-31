@@ -45,7 +45,7 @@ class ShopsList extends Component {
                             {table}
                             <div className="w-100"></div>
                             <button type="button" className="btn btn-primary m-2"
-                                    onClick={this.handleShowForm}>Добавить магазин
+                                    onClick={this.handleShowForm}>Add shop
                             </button>
                         </div>
                     }

@@ -48,14 +48,14 @@ class Shop extends Component {
 
     render() {
         return (<div>
-                <h2>Магазины</h2>
+                <h2>Shops</h2>
                 <table className="table table-striped">
                     <thead>
                     <tr>
                         <th scope="col">№</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Адрес</th>
-                        <th scope="col" colSpan='2'>Режим работы</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Address</th>
+                        <th scope="col" colSpan='2'>Mode</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -69,10 +69,10 @@ class Shop extends Component {
                             <td>{s.mode}</td>
                             <td>
                                 <button type="button" className="btn btn-secondary btn-sm" id={s.id}
-                                        onClick={this.handleEdit}>Редактировать
+                                        onClick={this.handleEdit}>Edit
                                 </button>
-                                <Link to={`/shops/${s.id}`} className="btn btn-primary btn-sm m-1">Перейти к
-                                    товарам</Link>
+                                <Link to={`/shops/${s.id}`} className="btn btn-primary btn-sm m-1">Go to products
+                                </Link>
                             </td>
                         </tr>
                     ))}

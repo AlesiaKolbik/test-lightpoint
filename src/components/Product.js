@@ -27,10 +27,10 @@ class Product extends Component {
                 <td>{this.props.description}</td>
                 <td>
                     <button type="button" className="btn btn-secondary btn-sm m-1"
-                            onClick={this.handleDelete}>Удалить
+                            onClick={this.handleDelete}>Delete
                     </button>
                     <button type="button" className="btn btn-secondary btn-sm"
-                            onClick={this.handleEdit}>Редактировать
+                            onClick={this.handleEdit}>Edit
                     </button>
                 </td>
             </tr>
